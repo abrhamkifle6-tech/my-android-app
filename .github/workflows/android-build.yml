@@ -35,11 +35,21 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
 
-      # 5️⃣ Build the debug APK using system Gradle
+      # 5️⃣ Install Gradle 8.3 for compatibility with Android project
+      - name: Install Gradle 8.3
+        run: |
+          sudo apt-get update
+          sudo apt-get install unzip -y
+          wget https://services.gradle.org/distributions/gradle-8.3-bin.zip
+          unzip -qq gradle-8.3-bin.zip
+          sudo mv gradle-8.3 /opt/gradle-8.3
+          echo "PATH=/opt/gradle-8.3/bin:$PATH" >> $GITHUB_ENV
+
+      # 6️⃣ Build the debug APK using system Gradle 8.3
       - name: Build debug APK
         run: gradle assembleDebug --no-daemon
 
-      # 6️⃣ Upload APK artifact
+      # 7️⃣ Upload APK artifact
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
