@@ -3,22 +3,14 @@ plugins {
 }
 
 android {
-    namespace "com.example.freqapp"
-    compileSdk 33
-
+    namespace "com.example.freqapp" // needed in Gradle 8+
+    compileSdkVersion 33   // can keep this high
     defaultConfig {
         applicationId "com.example.freqapp"
-        minSdk 21
-        targetSdk 33
+        minSdkVersion 26    // minimum Android 8
+        targetSdkVersion 26 // target your phone
         versionCode 1
         versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
 }
 
